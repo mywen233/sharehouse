@@ -1,1 +1,1 @@
-School project :)
+Revamping with vibe coding.
