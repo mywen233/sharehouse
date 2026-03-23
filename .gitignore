@@ -1,0 +1,14 @@
+# Eclipse metadata
+.classpath
+.project
+.settings/
+.externalToolBuilders/
+.myeclipse/
+.mymetadata
+
+# Compiled class files
+WebRoot/WEB-INF/classes/
+*.class
+
+# macOS system files
+.DS_Store
