@@ -539,10 +539,6 @@ var upload = {
 				onUploadProgress : function(file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal){
 					//$('.img_uploaded_percent').show().html((100*bytesUploaded/bytesTotal) + '%');
 				},
-				onFallback : function(){
-					var url ='<a style = "color:#e68303;" target="_blank" href="http://get.adobe.com/flashplayer/?promoid=JZEFT"  onclick="s_objectID=&quot;http://get.adobe.com/flashplayer/?promoid=JZEFT_1&quot;;return this.s_oc?this.s_oc(e):true">下载Adobe Flash Player</a>'
-					errorBox.show("目测你还没有安装flash哦~下载一个吧 "+url);
-		        },
 				onUploadSuccess	: function(file, root, response){
 					idlePicUpload.callBack(root)
 				},
@@ -581,8 +577,7 @@ var upload = {
 }
 
 
-// 各种盒子
- 
+// 各种盒子 
 var confirmBox = {
 	show:function(data){
 		stopEvent(window.event || arguments.callee.caller.arguments[0]);
@@ -1101,49 +1096,49 @@ var hasFlash = function(){
 };
 
 //美图秀秀
-var mtxx = {
-	init:function(data){
-		 xiuxiu.setUploadURL("http://www.quan15.com/"+data.method);
-		 xiuxiu.setUploadType(2);
-		 xiuxiu.setUploadDataFieldName ("file");
-		 xiuxiu. setLaunchVars ("nav", "edit");
-		 xiuxiu.setUploadArgs({'callBackFunc' : data.callBack,'uploadDir' : data.path ,'uploadType':"mtxx"});
-		 xiuxiu.onClose = function(id) {
-			$('#altContainer').remove();
-			$("#meituBox").hide();
-			lock.cancelStrengthLock();
-		 }
-		 xiuxiu.onUploadResponse= function(data,id) {
-			 xiuxiu.close();
-			 var func = eval(data); 
-			 func();		
-		 }
-		 xiuxiu.onBeforeUpload = function (data, id)
-		 {
-		   var size = data. size;
-		   if(size > 5 * 1024 * 1024)
-		   { 
-		     errorBox.show("图片大小不能超过5M");
-		     return false; 
-		   }
-		   return true; 
-		 }
-	},
-	show:function(){
-		if(hasFlash()){
-			lock.addStrengthLock();
-			getCenterPlace('meituBox');
-			$("#meituBox").show();
-			xiuxiu.embedSWF('altContainer', 1,'530px', '470px');
-		}else{
-			var url ='<a style = "color:#e68303;" target="blank" href="http://get.adobe.com/flashplayer/?promoid=JZEFT"  onclick="s_objectID=&quot;http://get.adobe.com/flashplayer/?promoid=JZEFT_1&quot;;return this.s_oc?this.s_oc(e):true">下载Adobe Flash Player</a>'
-			errorBox.show("目测你还没有安装flash哦~下载一个吧 "+url);
-		}
-	},
-	hide:function(){
-		xiuxiu.close();
-	}
-}
+// var mtxx = {
+// 	init:function(data){
+// 		 xiuxiu.setUploadURL("http://www.quan15.com/"+data.method);
+// 		 xiuxiu.setUploadType(2);
+// 		 xiuxiu.setUploadDataFieldName ("file");
+// 		 xiuxiu. setLaunchVars ("nav", "edit");
+// 		 xiuxiu.setUploadArgs({'callBackFunc' : data.callBack,'uploadDir' : data.path ,'uploadType':"mtxx"});
+// 		 xiuxiu.onClose = function(id) {
+// 			$('#altContainer').remove();
+// 			$("#meituBox").hide();
+// 			lock.cancelStrengthLock();
+// 		 }
+// 		 xiuxiu.onUploadResponse= function(data,id) {
+// 			 xiuxiu.close();
+// 			 var func = eval(data);
+// 			 func();
+// 		 }
+// 		 xiuxiu.onBeforeUpload = function (data, id)
+// 		 {
+// 		   var size = data. size;
+// 		   if(size > 5 * 1024 * 1024)
+// 		   {
+// 		     errorBox.show("图片大小不能超过5M");
+// 		     return false;
+// 		   }
+// 		   return true;
+// 		 }
+// 	},
+// 	show:function(){
+// 		if(hasFlash()){
+// 			lock.addStrengthLock();
+// 			getCenterPlace('meituBox');
+// 			$("#meituBox").show();
+// 			xiuxiu.embedSWF('altContainer', 1,'530px', '470px');
+// 		}else{
+// 			var url ='<a style = "color:#e68303;" target="blank" href="http://get.adobe.com/flashplayer/?promoid=JZEFT"  onclick="s_objectID=&quot;http://get.adobe.com/flashplayer/?promoid=JZEFT_1&quot;;return this.s_oc?this.s_oc(e):true">下载Adobe Flash Player</a>'
+// 			errorBox.show("目测你还没有安装flash哦~下载一个吧 "+url);
+// 		}
+// 	},
+// 	hide:function(){
+// 		xiuxiu.close();
+// 	}
+// }
 var topNav = {
 	init:function(){
 		$("#top_config").unbind().hover(function(){$(this).children("div").stop(true,true).slideToggle("100");});
