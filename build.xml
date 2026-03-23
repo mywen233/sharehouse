@@ -1,0 +1,29 @@
+<project name="sharehouse" basedir="." default="compile">
+    <property name="src.dir" value="src"/>
+    <property name="web.dir" value="WebRoot"/>
+    <property name="lib.dir" value="${web.dir}/WEB-INF/lib"/>
+    <property name="classes.dir" value="${web.dir}/WEB-INF/classes"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+        <!-- Include Tomcat libraries for Servlet/JSP APIs -->
+        <fileset dir="/usr/local/tomcat/lib" includes="*.jar" erroronmissingdir="false"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" source="1.8" target="1.8" encoding="UTF-8" nowarn="true">
+            <classpath refid="classpath"/>
+        </javac>
+        <!-- Copy all non-Java resources (.xml, .properties, .ftl, .hbm.xml) -->
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+</project>

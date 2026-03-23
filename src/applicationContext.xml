@@ -11,7 +11,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>sharehouse.ctovs8tgbl00.us-west-2.rds.amazonaws.com:3306/sharehouse</value>
+			<value>jdbc:mysql://localhost:3306/sharehouse?useUnicode=true&amp;characterEncoding=utf-8</value>
 		</property>
 		<property name="username">
 			<value>SHAREHOUSE</value>
