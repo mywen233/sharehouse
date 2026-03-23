@@ -1,5 +1,8 @@
 FROM tomcat:9-jdk8
 
+# Disable Tomcat 8005 shutdown port to suppress Render health check log spam
+RUN sed -i 's/port="8005" shutdown="SHUTDOWN"/port="-1" shutdown="SHUTDOWN"/' /usr/local/tomcat/conf/server.xml
+
 # Install dependencies (MariaDB, Memcached, Ant)
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
