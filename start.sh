@@ -15,6 +15,10 @@ for i in {1..15}; do
     sleep 2
 done
 
+# Initialize unmapped legacy tables
+echo "Initializing legacy unmapped tables..."
+mysql sharehouse < /app/schema_extras.sql || echo "Warning: failed to load schema_extras.sql"
+
 # Start Memcached
 echo "Starting Memcached..."
 memcached -d -u root -m 64 -p 11211
