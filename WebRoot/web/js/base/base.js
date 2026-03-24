@@ -141,7 +141,7 @@ function move(obj) {
 			newy = Evt.clientY - y_cj;
 			$.style.left = newx + "px";
 			$.style.top = newy + "px";
-		//防止区块拖出可见区
+			//防止区块拖出可见区
 
 			if (newx <= 0) {
 				$.style.left = "0px";
@@ -511,70 +511,33 @@ var lock = {
 //上传基本操作
 var upload = {
 	init: function () {
-		if ($("#idle_upload")[0]) {
-			var $input = $("#idle_upload");
-			$input.attr("multiple", "multiple");
-			$input.attr("accept", "image/gif, image/jpeg, image/png, image/jpg");
-
-			// Style it to mimic the old upload button
-			$input.wrap('<div class="upload-btn-wrapper" style="position:relative; overflow:hidden; display:inline-block; width:130px; height:30px; text-align:center; background-color:#e68303; line-height:30px; cursor:pointer; color:white; font-size:16px; margin-top:25px; margin-left:6px; border-radius:3px;"></div>');
-			$input.before('<span>快速上传</span>');
-			$input.css({
-				position: "absolute",
-				left: 0,
-				top: 0,
-				width: "300%",
-				height: "300%",
-				opacity: 0,
-				cursor: "pointer"
-			});
-
-			$input.on("change", function () {
-				var files = this.files;
-				if (!files || files.length === 0) return;
-
-				for (var i = 0; i < files.length; i++) {
-					var file = files[i];
-					var ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-					if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png' && ext !== '.gif') {
-						errorBox.show("文件 " + file.name + " 格式不支持");
-						continue;
-					}
-					if (file.size > 5 * 1024 * 1024) {
-						errorBox.show("文件 " + file.name + " 大小超过5MB");
-						continue;
-					}
-
-					(function (f) {
-						var formData = new FormData();
-						formData.append("file", f);
-						idlePicUpload.addImg();
-
-						$.ajax({
-							url: '/upload/idleImages',
-							type: 'POST',
-							data: formData,
-							processData: false,
-							contentType: false,
-							success: function (response) {
-								try {
-									var root = typeof response === 'string' ? JSON.parse(response) : response;
-									idlePicUpload.callBack(root);
-								} catch (e) {
-									idlePicUpload.callBack(response);
-								}
-							},
-							error: function () {
-								errorBox.show("上传失败，请重新再试");
-							}
-						});
-					})(file);
+		if ($("#idle_upload")[0])
+			$("#idle_upload").uploadify({
+				fileObjName: 'file',
+				swf: 'web/swf/uploadify.swf',
+				uploader: '/upload/idleImages',
+				fileTypeDesc: '支持的图片格式为：gif，jpg，png',
+				fileTypeExts: '*.gif; *.jpg; *.png; *.JPG; *.PNG; *.GIF; *.jpeg; *.JPEG;',
+				fileSizeLimit: '5MB',
+				buttonText: "快速上传",
+				width: '130',
+				height: '30',
+				auto: true,
+				multi: true,
+				onUploadStart: function (file) {
+					idlePicUpload.addImg();
+				},
+				onUploadProgress: function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+					//$('.img_uploaded_percent').show().html((100*bytesUploaded/bytesTotal) + '%');
+				},
+				onUploadSuccess: function (file, root, response) {
+					idlePicUpload.callBack(root)
+				},
+				//错误处理
+				onUploadError: function (file, errorCode, errorMsg, errorString) {
+					errorBox.show("上传失败，请重新再试")
 				}
-
-				// Reset input so the same file can be uploaded again if needed
-				$input.val("");
 			});
-		}
 	},
 	callBack: function (data) {
 		var flag = data.flag;
@@ -669,7 +632,7 @@ var successBox = {
 	show: function (msg, time) {
 		var box = '<div id = "success_box" style = "display:none;position:absolute;width:300px;background:url(/web/image/base/msgBox_bg.png);box-shadow:0px 0px 20px #333333;z-index:200;border:1px solid #b3b3b3;border-radius:5px;">' +
 			'	<div style = "width:240;margin:30px;">' +
-	//'		<img src = "/web/image/base/icon/succ_icon.png" style = "vertical-align:middle;"/>'+
+		//'		<img src = "/web/image/base/icon/succ_icon.png" style = "vertical-align:middle;"/>'+
 			'		<span id = "success_text" style = "text-align:left;line-height:25px;margin-left:5px;font-size:16px;text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);">' + msg + '</span>' +
 			'	</div>' +
 			'</div>';
@@ -1235,5 +1198,3 @@ $(document).ready(function () {
 		if ($("#top_search")[0]) { topNav.searchSubmit(); return false; }
 	}
 });
-
-
