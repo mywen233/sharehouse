@@ -46,7 +46,7 @@ var lost = {
 		});
 	},
 	showBox:function(){
-		mtxx.init({method:"activity/lost_found/upload",callBack:"uploadImg.callBack",path:"activity/lostfound"});
+		// mtxx.init({method:"activity/lost_found/upload",callBack:"uploadImg.callBack",path:"activity/lostfound"});
 		uploadImg.commonInit({action:"/activity/lost_found/upload",callBack:"uploadImg.callBack",path:"activity/lostfound"})
 		lock.show();
 		uploadImg.addImg(0);

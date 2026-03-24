@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	showImgBox.init();
-	mtxx.init({method:"upload/idleImages",callBack:"uploadImg.callBack",path:"idle-images"});
+	// mtxx.init({method:"upload/idleImages",callBack:"uploadImg.callBack",path:"idle-images"});
 	uploadImg.commonInit({action:"/upload/idleImages",callBack:"uploadImg.callBack",path:"idle-images"});
 });
 
@@ -461,7 +461,7 @@ var uploadImg = {
 		$("#uploadType").val("common");
 		$("#idle_upload_input").unbind().change(function(){
 			if(upload.validator({id:"idle_upload_input"})){
-				mtxx.hide();
+				// mtxx.hide();
 				var clickNum = Number($("#click_number").val());
 				$(".cancel").show();
 				$("#upb_"+clickNum).css("display","none");

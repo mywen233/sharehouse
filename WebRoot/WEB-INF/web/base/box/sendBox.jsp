@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/mtxx.js"></script>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/jquery.uploadify.min.js"></script>
 <div style = "float:left;margin-left:50px;margin-top:30px;line-height:28px;letter-spacing:2px;font-size:20px;">
 	<span style = "float:left;">有什么闲置物品? 立刻</span><div class = "button" style = "float:left;width:60px;height:25px;font-size:17px;border-radius:3px;line-height:25px;" onclick="sendBox.show({target:$('#sendShareBox'),type:'goods'})">发布</div><span style="float:left;">上来吧!</span>
@@ -32,7 +31,6 @@
 						<input type="hidden" id = "uploadType" name="uploadType"/>
 					</form>
 				</div> -->
-				<div class = "grey_button" style = "float:left;width:130px;height:30px;line-height:31px;font-size:16px;margin-left:6px;margin-top:25px;" onclick = "mtxx.show();"><img src = "${pageContext.request.contextPath}/web/image/base/icon/mtxx_logo.png" style = "width:28px;vertical-align:top;"/>优化一下</div>
 			</div>
 		</div>
 		<div class = "sendBox_nav" style = "height:25px;margin-top:15px;margin-left:5px;">

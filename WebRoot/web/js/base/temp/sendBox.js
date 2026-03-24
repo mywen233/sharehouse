@@ -10,7 +10,7 @@ var sendBox={
 		loadingBox.show("发布框加载中");
 		setTimeout(function(){
 			$("#"+data.target.attr("id")).css({"left":sl}).show();
-			mtxx.init({method:"upload/idleImages",callBack:"uploadImg.callBack",path:"idle-images"});
+			// mtxx.init({method:"upload/idleImages",callBack:"uploadImg.callBack",path:"idle-images"});
 			loadingBox.hide();
 		},300);
 	},

@@ -9,8 +9,7 @@
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/web/image/base/icon.png" />
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/jquery-1.7.js"></script>
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/base.js"></script>
-	<script type="text/javascript" src = "${pageContext.request.contextPath}/activity/sellbook/admin.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/mtxx.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/activity/sellbook/admin.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/base/base.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/activity/sellbook/main.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/activity/sellbook/admin.css">

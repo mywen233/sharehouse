@@ -8,8 +8,7 @@
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/web/image/base/icon.png" />	
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/base/base.css"/>
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/jquery-1.7.js" ></script>
-	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/base.js" ></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/mtxx.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/base.js"></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/home/common.css"/>
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/activity/lostfound/main.js" ></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/activity/lostfound/main.css"/>

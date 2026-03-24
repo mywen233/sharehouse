@@ -13,8 +13,7 @@
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/jquery.imageLens.js"></script>
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/base.js"></script>
 	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/rotate.js"></script>
-	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/temp/details.js"></script>
-	<script type="text/javascript" src = "${pageContext.request.contextPath}/web/js/base/mtxx.js" async></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/base/temp/details.js"></script>
 	<script type="text/javascript" src = "http://widget.renren.com/js/rrshare.js" async></script>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/base/base.css"/>
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/web/css/home/common.css"/>

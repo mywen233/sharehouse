@@ -2,7 +2,7 @@
 
 var sendBox = {
 	init:function(){
-		mtxx.init({method:"activity/sell_book/admin/upload",callBack:"uploadImg.callBack",path:"activity/sellbook"});
+		// mtxx.init({method:"activity/sell_book/admin/upload",callBack:"uploadImg.callBack",path:"activity/sellbook"});
 		uploadImg.commonInit({action:"/activity/sell_book/admin/upload",callBack:"uploadImg.callBack",path:"activity/sellbook"});
 	},
 	show:function(){
@@ -357,7 +357,7 @@ var uploadImg = {
 		$("#uploadType").val("common");
 		$("#idle_upload_input").unbind().change(function(){
 			if(upload.validator({id:"idle_upload_input"})){
-				mtxx.hide();
+				// mtxx.hide();
 				var clickNum = Number($("#click_number").val());
 				$(".cancel").show();
 				$("#upb_"+clickNum).css("display","none");
