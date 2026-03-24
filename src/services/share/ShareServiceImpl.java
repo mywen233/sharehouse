@@ -25,6 +25,9 @@ import model.User;
 
 import dao.base.BaseDao;
 
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 public class ShareServiceImpl implements ShareService {
 
 	BaseDao baseDao;
@@ -53,6 +56,23 @@ public class ShareServiceImpl implements ShareService {
 			}
 		}
 		return newList;
+	}
+	
+	private Date parseDate(Object obj) {
+		if (obj == null || obj.equals("")) return null;
+		if (obj instanceof Date) return (Date) obj;
+		if (obj instanceof String) {
+			try {
+				return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse((String) obj);
+			} catch (ParseException e) {
+				try {
+					return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse((String) obj);
+				} catch (ParseException e2) {
+					return null;
+				}
+			}
+		}
+		return null;
 	}
 	
 	private String fillIdleParams(Map params){
@@ -101,7 +121,7 @@ public class ShareServiceImpl implements ShareService {
 			root.put("obj_totalTime",o[9]);
 			root.put("obj_oldDegree",o[10]);
 			root.put("obj_isShared",o[11]);
-			root.put("obj_addTime",GetTime.getSendTime((Date)o[12]));
+			root.put("obj_addTime",GetTime.getSendTime(parseDate(o[12])));
 			root.put("obj_showInHome",o[13]);
 			root.put("obj_commentSize",o[14]);
 			root.put("obj_firstImg",o[15]);
@@ -140,7 +160,7 @@ public class ShareServiceImpl implements ShareService {
 			root.put("obj_totalTime",!o[9].toString().trim().equals("")?o[9]:"未说明");
 			root.put("obj_oldDegree",!o[10].toString().trim().equals("")?o[10]:"未说明");
 			root.put("obj_isShared",o[11]);
-			root.put("obj_addTime",GetTime.getSendTime((Date)o[12]));
+			root.put("obj_addTime",GetTime.getSendTime(parseDate(o[12])));
 			root.put("obj_showInHome",o[13]);
 			root.put("obj_commentSize",o[14]);
 			root.put("obj_firstImg",o[15]);
@@ -199,7 +219,7 @@ public class ShareServiceImpl implements ShareService {
 				map.put("goodsid",obj[4]);
 				map.put("goodsTitle",obj[5]);
 				map.put("shareType",obj[6]);
-				map.put("sendTime",GetTime.getSendTime((Date)obj[7]));
+				map.put("sendTime",GetTime.getSendTime(parseDate(obj[7])));
 				map.put("firstImg",obj[8]);
 				map.put("goodsDetails",obj[9]);
 				map.put("isFavored",obj[10]);
