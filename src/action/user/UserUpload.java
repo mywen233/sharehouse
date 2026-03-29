@@ -164,6 +164,15 @@ public class UserUpload extends ActionSupport{
 			if(tag){
 				callback = "upload.callBack({flag:\"1\",func:function(){"+callBackFunc+"({url:\""+thumbs_url+"\"});}});";  
 			}else callback = "upload.callBack({flag:\"0\"})";  
+		} else if (uploadType.equals("json")) {
+			JSONObject root = new JSONObject();
+			if (tag) {
+				root.put("flag", "1");
+				root.put("url", thumbs_url);
+			} else {
+				root.put("flag", "0");
+			}
+			callback = root.toString();
 		}
 		
 		response.getWriter().println(callback.trim());

@@ -511,33 +511,78 @@ var lock = {
 //上传基本操作
 var upload = {
 	init: function () {
-		if ($("#idle_upload")[0])
-			$("#idle_upload").uploadify({
-				fileObjName: 'file',
-				swf: 'web/swf/uploadify.swf',
-				uploader: '/upload/idleImages',
-				fileTypeDesc: '支持的图片格式为：gif，jpg，png',
-				fileTypeExts: '*.gif; *.jpg; *.png; *.JPG; *.PNG; *.GIF; *.jpeg; *.JPEG;',
-				fileSizeLimit: '5MB',
-				buttonText: "快速上传",
-				width: '130',
-				height: '30',
-				auto: true,
-				multi: true,
-				onUploadStart: function (file) {
-					idlePicUpload.addImg();
-				},
-				onUploadProgress: function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
-					//$('.img_uploaded_percent').show().html((100*bytesUploaded/bytesTotal) + '%');
-				},
-				onUploadSuccess: function (file, root, response) {
-					idlePicUpload.callBack(root)
-				},
-				//错误处理
-				onUploadError: function (file, errorCode, errorMsg, errorString) {
-					errorBox.show("上传失败，请重新再试")
+		if ($("#idle_upload")[0]) {
+			var filesToUpload = [];
+			var isUploading = false;
+
+			$("#idle_upload").on("change", function () {
+				var files = this.files;
+				if (!files || files.length === 0) return;
+
+				for (var i = 0; i < files.length; i++) {
+					filesToUpload.push(files[i]);
 				}
+				processQueue();
 			});
+
+			function processQueue() {
+				if (isUploading || filesToUpload.length === 0) return;
+				isUploading = true;
+				var file = filesToUpload.shift();
+
+				if (file.size > 5 * 1024 * 1024) {
+					errorBox.show("文件大小不能超过5MB");
+					isUploading = false;
+					processQueue();
+					return;
+				}
+
+				var ext = file.name.substring(file.name.lastIndexOf(".") + 1).toLowerCase();
+				if (["gif", "jpg", "jpeg", "png"].indexOf(ext) === -1) {
+					errorBox.show("请上传gif, jpg, png格式的图片");
+					isUploading = false;
+					processQueue();
+					return;
+				}
+
+				uploadFile(file);
+			}
+
+			function uploadFile(file) {
+				idlePicUpload.addImg();
+				var formData = new FormData();
+				formData.append("file", file);
+				formData.append("uploadDir", "idleImages");
+				formData.append("uploadType", "json");
+
+				$.ajax({
+					url: '/upload/idleImages',
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					dataType: 'json',
+					success: function (res) {
+						if (res.flag === "1") {
+							idlePicUpload.callBack(res);
+						} else {
+							errorBox.show(res.message || "上传失败");
+							var failBlock = $("[idle-pic-new]");
+							failBlock.parent().parent().remove();
+						}
+					},
+					error: function () {
+						errorBox.show("上传失败，请重新再试");
+						var failBlock = $("[idle-pic-new]");
+						failBlock.parent().parent().remove();
+					},
+					complete: function () {
+						isUploading = false;
+						processQueue();
+					}
+				});
+			}
+		}
 	},
 	callBack: function (data) {
 		var flag = data.flag;
